@@ -208,37 +208,39 @@ xl  (1280px): Large desktop — wider max-width containers
 
 All sections use an **IntersectionObserver** fade-up animation (no external library needed):
 
-```tsx
-// SectionWrapper.tsx
-'use client'
-import { useEffect, useRef } from 'react'
+```svelte
+<!-- SectionWrapper.svelte -->
+<script lang="ts">
+  import { onMount } from 'svelte'
 
-export function SectionWrapper({ id, className, children }: Props) {
-  const ref = useRef<HTMLElement>(null)
-  
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
+  export let id: string
+  export let className = ''
+
+  let sectionEl: HTMLElement
+
+  onMount(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && el.classList.add('animate-in'),
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          sectionEl.classList.add('animate-in')
+          observer.disconnect()
+        }
+      },
       { threshold: 0.1 }
     )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
 
-  return (
-    <section
-      id={id}
-      ref={ref}
-      className={`opacity-0 translate-y-6 transition-all duration-500 
-                  ease-out [&.animate-in]:opacity-100 [&.animate-in]:translate-y-0 
-                  ${className}`}
-    >
-      {children}
-    </section>
-  )
-}
+    observer.observe(sectionEl)
+    return () => observer.disconnect()
+  })
+</script>
+
+<section
+  bind:this={sectionEl}
+  {id}
+  class={`opacity-0 translate-y-6 transition-all duration-500 ease-out ${className}`}
+>
+  <slot />
+</section>
 ```
 
 **Animation rule**: 0.6s fade-up for section entrance, 150ms stagger for child elements inside sections. Respect `prefers-reduced-motion`.
@@ -248,9 +250,9 @@ export function SectionWrapper({ id, className, children }: Props) {
 ### Priority Order
 1. Implement `globals.css` with all CSS tokens
 2. Set up `tailwind.config.ts` with color/font/animation extensions for Svelte files
-3. Build `Nav.tsx` — the sticky nav is the first visible piece
-4. Build `Hero.tsx` — establishes the visual tone for the whole site
-5. Build `SectionWrapper.tsx` — wrap all remaining sections
+3. Build `Nav.svelte` — the sticky nav is the first visible piece
+4. Build `Hero.svelte` — establishes the visual tone for the whole site
+5. Build `SectionWrapper.svelte` — wrap all remaining sections
 6. Build remaining sections in order: About → Experience → Education → Skills → Achievements → Contact
 7. Final mobile responsive pass
 

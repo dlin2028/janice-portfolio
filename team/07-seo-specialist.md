@@ -48,8 +48,8 @@ Implement using `<svelte:head>`:
 
 Place in `src/routes/+layout.svelte` inside `<svelte:head>`:
 
-```tsx
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+```svelte
+<script lang="ts">
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -97,19 +97,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       addressCountry: 'US',
     },
   }
+</script>
 
-  return (
-    <html lang="en">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        />
-      </head>
-      <body>{children}</body>
-    </html>
-  )
-}
+<svelte:head>
+  <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
+</svelte:head>
 ```
 
 ## 🗺️ Sitemap — `static/sitemap.xml` (or generated in build step)
@@ -148,53 +140,7 @@ Specification for the OG image (1200×630px):
 **How to create**: Use Figma, Canva, or an OG generator script. A clean screenshot of the Hero section also works as a V1 OG image.
 
 ### Programmatic OG endpoint (optional upgrade):
-```tsx
-// src/routes/og-image/+server.ts
-import { ImageResponse } from 'next/og'
-
-export const runtime = 'edge'
-export const alt = 'Janice Jiang — XBRL Specialist & CPA | FASB'
-export const size = { width: 1200, height: 630 }
-export const contentType = 'image/png'
-
-export default async function Image() {
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          background: 'linear-gradient(135deg, #1A2B4A, #2C4A7C)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '60px',
-          gap: '48px',
-        }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://janicejiang.com/images/profile.jpg"
-          width={200}
-          height={200}
-          style={{ borderRadius: '50%', border: '4px solid white' }}
-          alt=""
-        />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <div style={{ color: 'white', fontSize: 64, fontWeight: 700 }}>Janice Jiang</div>
-          <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: 24 }}>
-            XBRL Postgraduate Technical Assistant · FASB
-          </div>
-          <div style={{ color: '#C9A84C', fontSize: 20 }}>
-            CPA · Gies UIUC · 4.0 GPA
-          </div>
-        </div>
-      </div>
-    ),
-    { ...size }
-  )
-}
-```
+Generate `static/og-image.png` during build with a small script (for example using `sharp` + SVG template), or keep a manually designed static asset in `static/og-image.png`.
 
 ## 📊 Core Web Vitals Targets
 
@@ -203,8 +149,8 @@ For a static SvelteKit portfolio served via CDN:
 | Metric | Target | How to Hit It |
 |--------|--------|---------------|
 | LCP | < 2.5s | `priority` on Hero photo; webp format; preload font |
-| FID/INP | < 100ms | Minimal JS (no heavy client libs); Server Components default |
-| CLS | < 0.1 | Explicit `width`+`height` on all `<Image>` components |
+| FID/INP | < 100ms | Minimal JS (no heavy client libs) |
+| CLS | < 0.1 | Explicit `width`+`height` on all `<img>` components |
 | TTFB | < 200ms | CDN edge delivery for static assets; no SSR |
 | FCP | < 1.8s | Inline critical CSS; font `display: swap` |
 
@@ -221,7 +167,7 @@ Ensure all anchor IDs match exactly between nav links and section elements:
 #contact    → Contact section
 ```
 
-Each `<section>` must have its `id` attribute set — handled by `SectionWrapper.tsx`.
+Each `<section>` must have its `id` attribute set — handled by `SectionWrapper.svelte`.
 
 ## ✅ SEO Pre-Launch Checklist
 

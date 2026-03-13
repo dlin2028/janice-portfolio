@@ -35,18 +35,14 @@ bun install
 ```
 
 Sprint 1 deliverable — `src/routes/+page.svelte` (placeholder):
-```tsx
-export default function Home() {
-  return (
-    <main style={{ fontFamily: 'Georgia, serif', background: '#1A2B4A', color: 'white', minHeight: '100vh', display: 'grid', placeItems: 'center', textAlign: 'center' }}>
-      <div>
-        <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Janice Jiang</h1>
-        <p style={{ fontSize: '1.25rem', opacity: 0.8 }}>Postgraduate Technical Assistant · FASB</p>
-        <p style={{ fontSize: '1rem', opacity: 0.6, marginTop: '0.5rem' }}>Site coming soon · jjiang@fasb.org</p>
-      </div>
-    </main>
-  )
-}
+```svelte
+<main style="font-family: Georgia, serif; background: #1A2B4A; color: white; min-height: 100vh; display: grid; place-items: center; text-align: center;">
+  <div>
+    <h1 style="font-size: 3rem; margin-bottom: 1rem;">Janice Jiang</h1>
+    <p style="font-size: 1.25rem; opacity: 0.8;">Postgraduate Technical Assistant · FASB</p>
+    <p style="font-size: 1rem; opacity: 0.6; margin-top: 0.5rem;">Site coming soon · jjiang@fasb.org</p>
+  </div>
+</main>
 ```
 
 Sprint 1 deploy steps:
@@ -72,13 +68,13 @@ git push -u origin main
 
 Step 1 — Copy images to project:
 ```bash
-cp "../Janice Jiang _ LinkedIn_files/1754413121980" public/images/profile.jpg
-cp "../Janice Jiang _ LinkedIn_files/1754413013917" public/images/cover.jpg
-cp "../Janice Jiang _ LinkedIn_files/1631330709142" public/images/fasb-logo.jpg
-cp "../Janice Jiang _ LinkedIn_files/giesbusiness_logo" public/images/gies-logo.jpg
-cp "../Janice Jiang _ LinkedIn_files/caterpillar_inc_logo" public/images/caterpillar-logo.jpg
-cp "../Janice Jiang _ LinkedIn_files/claiduiuc_logo" public/images/claid-logo.jpg
-cp "../Janice Jiang _ LinkedIn_files/university_of_illinois_at_urbana_champaign_logo" public/images/uiuc-logo.jpg
+cp "../Janice Jiang _ LinkedIn_files/1754413121980" static/images/profile.jpg
+cp "../Janice Jiang _ LinkedIn_files/1754413013917" static/images/cover.jpg
+cp "../Janice Jiang _ LinkedIn_files/1631330709142" static/images/fasb-logo.jpg
+cp "../Janice Jiang _ LinkedIn_files/giesbusiness_logo" static/images/gies-logo.jpg
+cp "../Janice Jiang _ LinkedIn_files/caterpillar_inc_logo" static/images/caterpillar-logo.jpg
+cp "../Janice Jiang _ LinkedIn_files/claiduiuc_logo" static/images/claid-logo.jpg
+cp "../Janice Jiang _ LinkedIn_files/university_of_illinois_at_urbana_champaign_logo" static/images/uiuc-logo.jpg
 ```
 
 Note: files from LinkedIn_files/ have no extension but ARE valid JPEG files — renaming with .jpg extension is correct.

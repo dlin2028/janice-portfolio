@@ -109,46 +109,37 @@ Image priority rules:
 
 ## 🔧 Component Implementations
 
-### `SectionWrapper.tsx`
-```tsx
-'use client'
+### `SectionWrapper.svelte`
+```svelte
+<script lang="ts">
+  import { onMount } from 'svelte'
 
-import { useEffect, useRef } from 'react'
+  export let id: string
+  export let className = ''
 
-interface Props {
-  id: string
-  className?: string
-  children: React.ReactNode
-}
+  let sectionEl: HTMLElement
 
-export default function SectionWrapper({ id, className = '', children }: Props) {
-  const ref = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
+  onMount(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add('section-visible')
+          sectionEl.classList.add('section-visible')
           observer.disconnect()
         }
       },
       { threshold: 0.1 }
     )
-    observer.observe(el)
+    observer.observe(sectionEl)
     return () => observer.disconnect()
-  }, [])
+  })
+</script>
 
-  return (
-    <section id={id} ref={ref} className={`section-animate ${className}`}>
-      {children}
-    </section>
-  )
-}
+<section bind:this={sectionEl} {id} class={`section-animate ${className}`}>
+  <slot />
+</section>
 ```
 
-In `globals.css`:
+In `app.css`:
 ```css
 .section-animate {
   opacity: 0;
@@ -170,129 +161,82 @@ In `globals.css`:
 }
 ```
 
-### `Nav.tsx`
-```tsx
-'use client'
+### `Nav.svelte`
+```svelte
+<script lang="ts">
+  import { onMount } from 'svelte'
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
+  const links = [
+    { href: '#about', label: 'About' },
+    { href: '#experience', label: 'Experience' },
+    { href: '#education', label: 'Education' },
+    { href: '#skills', label: 'Skills' },
+    { href: '#contact', label: 'Contact' },
+  ]
 
-const links = [
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#education', label: 'Education' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#contact', label: 'Contact' },
-]
+  let scrolled = false
 
-export default function Nav() {
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 80)
+  onMount(() => {
+    const handler = () => (scrolled = window.scrollY > 80)
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
-  }, [])
+  })
+</script>
 
-  return (
-    <nav
-      className={`fixed top-0 inset-x-0 z-50 h-[72px] flex items-center transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-sm' : 'bg-transparent'
-      }`}
-      aria-label="Main navigation"
-    >
-      <div className="max-w-content mx-auto w-full px-6 flex items-center justify-between">
-        <span
-          className={`font-playfair font-medium text-lg transition-colors duration-300 ${
-            scrolled ? 'text-navy' : 'text-white'
-          }`}
-        >
-          Janice Jiang
-        </span>
-        <ul className="hidden md:flex items-center gap-8" role="list">
-          {links.map(({ href, label }) => (
-            <li key={href}>
-              <a
-                href={href}
-                className={`font-inter text-sm font-medium transition-colors duration-200 hover:text-gold relative nav-link ${
-                  scrolled ? 'text-muted' : 'text-white/90'
-                }`}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <a
-          href="#contact"
-          className={`hidden md:inline-flex items-center border rounded-full px-5 py-2 text-sm font-inter font-medium transition-all duration-200 ${
-            scrolled
-              ? 'border-navy text-navy hover:bg-navy hover:text-white'
-              : 'border-white text-white hover:bg-white/10'
-          }`}
-        >
-          Contact
-        </a>
-      </div>
-    </nav>
-  )
-}
+<nav class={`fixed top-0 inset-x-0 z-50 h-[72px] flex items-center transition-all duration-300 ${scrolled ? 'bg-white shadow-sm' : 'bg-transparent'}`} aria-label="Main navigation">
+  <div class="max-w-content mx-auto w-full px-6 flex items-center justify-between">
+    <span class={`font-playfair font-medium text-lg transition-colors duration-300 ${scrolled ? 'text-navy' : 'text-white'}`}>Janice Jiang</span>
+    <ul class="hidden md:flex items-center gap-8" role="list">
+      {#each links as link}
+        <li>
+          <a href={link.href} class={`font-inter text-sm font-medium transition-colors duration-200 hover:text-gold relative nav-link ${scrolled ? 'text-muted' : 'text-white/90'}`}>{link.label}</a>
+        </li>
+      {/each}
+    </ul>
+    <a href="#contact" class={`hidden md:inline-flex items-center border rounded-full px-5 py-2 text-sm font-inter font-medium transition-all duration-200 ${scrolled ? 'border-navy text-navy hover:bg-navy hover:text-white' : 'border-white text-white hover:bg-white/10'}`}>Contact</a>
+  </div>
+</nav>
 ```
 
-### `ExperienceCard.tsx`
-```tsx
-interface Role {
-  title: string
-  period: string
-  bullets: string[]
-}
+### `ExperienceCard.svelte`
+```svelte
+<script lang="ts">
+  export let company: string
+  export let logo: string
+  export let location: string
+  export let roles: { title: string; period: string; bullets: string[] }[] = []
+</script>
 
-interface Props {
-  company: string
-  logo: string
-  location: string
-  roles: Role[]
-}
+<article class="bg-white border border-highlight rounded-2xl p-6 shadow-card hover:shadow-hover hover:-translate-y-0.5 transition-all duration-250">
+  <div class="flex items-start gap-4">
+    <img src={`/images/${logo}`} alt={`${company} logo`} width="56" height="56" loading="lazy" class="rounded-xl border border-highlight object-contain p-1.5 bg-white flex-shrink-0" />
+    <div class="flex-1 min-w-0">
+      <h3 class="font-playfair font-semibold text-base text-navy">{company}</h3>
+      <p class="text-sm text-muted mt-0.5">{location}</p>
+    </div>
+  </div>
 
-export default function ExperienceCard({ company, logo, location, roles }: Props) {
-  return (
-    <article className="bg-white border border-highlight rounded-2xl p-6 shadow-card hover:shadow-hover hover:-translate-y-0.5 transition-all duration-250">
-      <div className="flex items-start gap-4">
-        <Image
-          src={`/images/${logo}`}
-          alt={`${company} logo`}
-          width={56}
-          height={56}
-          className="rounded-xl border border-highlight object-contain p-1.5 bg-white flex-shrink-0"
-        />
-        <div className="flex-1 min-w-0">
-          <h3 className="font-playfair font-semibold text-base text-navy">{company}</h3>
-          <p className="text-sm text-muted mt-0.5">{location}</p>
+  <div class="mt-4 space-y-4">
+    {#each roles as role, i}
+      <div class={i > 0 ? 'pt-4 border-t border-highlight' : ''}>
+        <div class="flex items-baseline justify-between gap-4">
+          <p class="font-inter font-semibold text-[15px] text-ink">{role.title}</p>
+          <p class="font-inter text-xs text-muted whitespace-nowrap">{role.period}</p>
         </div>
+        {#if role.bullets.length > 0}
+          <ul class="mt-2 space-y-1.5">
+            {#each role.bullets as bullet}
+              <li class="flex gap-2 text-[14px] text-ink leading-relaxed">
+                <span class="text-gold mt-1 flex-shrink-0">•</span>
+                {bullet}
+              </li>
+            {/each}
+          </ul>
+        {/if}
       </div>
-      <div className="mt-4 space-y-4">
-        {roles.map((role, i) => (
-          <div key={i} className={i > 0 ? 'pt-4 border-t border-highlight' : ''}>
-            <div className="flex items-baseline justify-between gap-4">
-              <p className="font-inter font-semibold text-[15px] text-ink">{role.title}</p>
-              <p className="font-inter text-xs text-muted whitespace-nowrap">{role.period}</p>
-            </div>
-            {role.bullets.length > 0 && (
-              <ul className="mt-2 space-y-1.5">
-                {role.bullets.map((bullet, j) => (
-                  <li key={j} className="flex gap-2 text-[14px] text-ink leading-relaxed">
-                    <span className="text-gold mt-1 flex-shrink-0">•</span>
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
-      </div>
-    </article>
-  )
-}
+    {/each}
+  </div>
+</article>
 ```
 
 ## 📊 Data Files — Avoid Prop-Drilling with Static Data Objects
@@ -349,7 +293,7 @@ export const experience = [
 
 ## ⚡ Performance Rules
 
-1. **LCP target**: Hero profile photo — ensure `priority` prop is set, image is ≤ 80KB (use webp if possible)
+1. **LCP target**: Hero profile photo — load eagerly, keep ≤ 80KB (use webp if possible)
 2. **No layout shift**: Set explicit `width` and `height` on all `<img>` elements
 3. **Static generation**: Use SSG (`adapter-static` or platform static output)
 4. **Bundle discipline**: Keep reactive client logic minimal (nav scroll state, skill tooltips, section observer only)
@@ -371,7 +315,7 @@ export const experience = [
 Before deployment:
 - [ ] `bun run build` completes with zero errors and zero warnings
 - [ ] `bun run preview` renders all 7 sections correctly
-- [ ] All 7 images load from `/public/images/` (confirm file names match data files)
+- [ ] All 7 images load from `/static/images/` (confirm file names match data files)
 - [ ] Nav scroll behavior works: transparent → white on scroll past 80px
 - [ ] All section anchor links (`#about`, `#experience`, etc.) work from nav
 - [ ] Mobile layout verified at 375px, 768px, 1280px

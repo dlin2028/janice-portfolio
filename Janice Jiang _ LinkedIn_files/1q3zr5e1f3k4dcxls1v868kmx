@@ -1,0 +1,1 @@
+@media (prefers-color-scheme:dark){.theme--system{--hue-web-svg-display-light:none;--hue-web-svg-display-dark:block;--color-brand:var(--white-a90);--color-background-canvas:var(--black);--color-brand-accent-5-on-dark:var(--warm-gray-50);--color-action:var(--blue-50);--color-label-knockout:var(--black-a90)}}

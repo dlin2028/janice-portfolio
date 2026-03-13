@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dlin2028.github.io/janice-portfolio/sitemap.xml

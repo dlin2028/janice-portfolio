@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --navy:       #1A2B4A;
+  --navy-light: #2C4A7C;
+  --navy-dark:  #0F1A2E;
+  --gold:       #C9A84C;
+  --gold-light: #E8D28A;
+  --gold-dark:  #A07E30;
+  --off-white:  #F8F9FB;
+  --white:      #FFFFFF;
+  --ink:        #1C1C1E;
+  --muted:      #6B7280;
+  --highlight:  #E8F0FE;
+
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-inter:    'Inter', system-ui, sans-serif;
+
+  --shadow-card:  0 1px 3px 0 rgb(0 0 0 / 0.08), 0 4px 12px 0 rgb(0 0 0 / 0.05);
+  --shadow-hover: 0 4px 16px 0 rgb(26 43 74 / 0.14);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter);
+  background: var(--off-white);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-playfair);
+  line-height: 1.2;
+}
+
+.section-animate {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.section-animate.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}

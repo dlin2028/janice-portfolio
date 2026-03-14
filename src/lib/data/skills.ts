@@ -22,9 +22,14 @@ export const skillCategories = [
     ],
   },
   {
-    label: 'Credentials & Languages',
+    label: 'Credentials',
     skills: [
       { name: 'CPA — Certified Public Accountant', certified: true },
+    ],
+  },
+  {
+    label: 'Languages',
+    skills: [
       { name: 'Mandarin — Native', certified: false },
       { name: 'Fuzhounese — Fluent', certified: false },
     ],

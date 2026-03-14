@@ -10,9 +10,9 @@ export const achievements = [
     sub: 'University-wide honors · UIUC 2024',
   },
   {
-    callout: '4.0 / 4.0',
-    title: 'Dual Perfect GPA',
-    sub: 'BS & MAS · Gies College of Business',
+    callout: 'Honors',
+    title: 'Academic Excellence',
+    sub: 'James Scholar · Bronze Tablet — Top 3%',
   },
   {
     callout: 'GAAP',

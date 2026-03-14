@@ -43,7 +43,6 @@
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
             <span style="font-family:var(--font-inter);font-size:0.8125rem;color:var(--muted);">{edu.period}</span>
-            <span style="font-family:var(--font-inter);font-size:0.8125rem;font-weight:600;color:var(--navy-dark);background:var(--gold-light);padding:4px 12px;border-radius:99px;">GPA: {edu.gpa}</span>
           </div>
           {#if edu.honors.length > 0}
             <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;">

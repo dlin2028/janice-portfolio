@@ -23,7 +23,7 @@
         Postgraduate Technical Assistant · FASB
       </p>
       <p style="font-family:var(--font-inter);font-size:1rem;color:rgba(255,255,255,0.7);margin-top:6px;">
-        CPA · Gies UIUC · 4.0 GPA
+        CPA · Gies UIUC
       </p>
       <p style="font-family:var(--font-inter);font-size:1.0625rem;color:rgba(255,255,255,0.85);margin-top:16px;font-style:italic;">
         Building the infrastructure of U.S. financial reporting.

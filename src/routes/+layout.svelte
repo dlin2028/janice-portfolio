@@ -40,15 +40,15 @@
 
 <svelte:head>
   <title>Janice Jiang — XBRL Specialist & CPA | FASB</title>
-  <meta name="description" content="Janice Jiang is the 2025–2026 XBRL Postgraduate Technical Assistant at FASB, contributing to the U.S. GAAP Taxonomy. CPA. Gies College of Business, UIUC. Dual 4.0 GPA." />
+  <meta name="description" content="Janice Jiang is the 2025–2026 XBRL Postgraduate Technical Assistant at FASB, contributing to the U.S. GAAP Taxonomy. CPA. Gies College of Business, UIUC." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dlin2028.github.io/janice-portfolio" />
   <meta property="og:site_name" content="Janice Jiang" />
   <meta property="og:title" content="Janice Jiang — XBRL Specialist & CPA | FASB" />
-  <meta property="og:description" content="Postgraduate Technical Assistant at FASB, building the U.S. GAAP Taxonomy. CPA | Gies UIUC | 4.0 GPA." />
+  <meta property="og:description" content="Postgraduate Technical Assistant at FASB, building the U.S. GAAP Taxonomy. CPA | Gies UIUC." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Janice Jiang — XBRL Specialist & CPA | FASB" />
-  <meta name="twitter:description" content="Postgraduate Technical Assistant at FASB, building the U.S. GAAP Taxonomy. CPA | Gies UIUC | 4.0 GPA." />
+  <meta name="twitter:description" content="Postgraduate Technical Assistant at FASB, building the U.S. GAAP Taxonomy. CPA | Gies UIUC." />
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
   {@html `<script type="application/ld+json">${JSON.stringify(personSchema)}</script>`}
 </svelte:head>

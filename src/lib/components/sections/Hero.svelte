@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { base } from '$app/paths';
 </script>
 
 <section id="hero" style="min-height:100vh;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);display:flex;align-items:center;justify-content:center;padding:120px 24px 80px;position:relative;overflow:hidden;">
   <div style="max-width:900px;width:100%;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;">
     <div style="width:160px;height:160px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,0.8);box-shadow:0 8px 32px rgba(0,0,0,0.3);flex-shrink:0;">
       <img
-        src="/images/profile.jpg"
+        src="{base}/images/profile.jpg"
         alt="Janice Jiang — Postgraduate Technical Assistant at FASB"
         width="160"
         height="160"

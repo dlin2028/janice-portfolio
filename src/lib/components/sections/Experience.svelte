@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
   import { experience } from '$lib/data/experience.js';
 
   let sectionEl: HTMLElement;
@@ -31,7 +32,7 @@
         >
           <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;">
             <img
-              src="/images/{exp.logo}"
+              src="{base}/images/{exp.logo}"
               alt="{exp.company} logo"
               width="56"
               height="56"

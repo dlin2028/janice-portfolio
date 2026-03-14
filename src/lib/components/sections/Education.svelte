@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
   import { education } from '$lib/data/education.js';
 
   let sectionEl: HTMLElement;
@@ -28,7 +29,7 @@
         <article style="background:white;border:1px solid var(--highlight);border-radius:16px;padding:28px;box-shadow:var(--shadow-card);">
           <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;">
             <img
-              src="/images/{edu.logo}"
+              src="{base}/images/{edu.logo}"
               alt="Gies College of Business logo"
               width="56"
               height="56"

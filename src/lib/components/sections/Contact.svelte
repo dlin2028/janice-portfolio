@@ -27,12 +27,12 @@
     </p>
     <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
       <a
-        href="mailto:jjiang@fasb.org"
+        href="mailto:janicejiang683@gmail.com"
         style="font-family:var(--font-inter);font-size:1.125rem;font-weight:600;color:var(--navy);text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:2px;transition:color 0.2s;"
         onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.color='var(--gold)'; }}
         onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.color='var(--navy)'; }}
       >
-        jjiang@fasb.org
+        janicejiang683@gmail.com
       </a>
       <a
         href="https://www.linkedin.com/in/janice-jiang-508bba21b/"

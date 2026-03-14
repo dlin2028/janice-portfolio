@@ -19,7 +19,7 @@
 
   const highlights = [
     { title: 'U.S. GAAP Taxonomy', sub: 'FASB XBRL Postgraduate Technical Assistant' },
-    { title: 'Dual 4.0 GPA', sub: 'BS & MAS · Gies College of Business, UIUC' },
+    { title: 'Academic Honors', sub: 'James Scholar · Bronze Tablet — Top 3%' },
     { title: 'CPA Licensed', sub: 'All exam sections passed · 2025' },
   ];
 </script>
@@ -31,7 +31,7 @@
     <div style="display:grid;grid-template-columns:1fr;gap:40px;">
       <div>
         <p style="font-family:var(--font-inter);font-size:1rem;color:var(--ink);line-height:1.8;margin-bottom:16px;">
-          I studied accountancy at the University of Illinois Urbana-Champaign's Gies College of Business, earning both my Bachelor's and Master's degrees with concentrations in Financial Reporting &amp; Assurance and Data Analytics — graduating with a perfect 4.0 in both programs.
+          I studied accountancy at the University of Illinois Urbana-Champaign's Gies College of Business, earning both my Bachelor's and Master's degrees with concentrations in Financial Reporting &amp; Assurance and Data Analytics.
         </p>
         <p style="font-family:var(--font-inter);font-size:1rem;color:var(--ink);line-height:1.8;margin-bottom:16px;">
           I'm currently the 2025–2026 XBRL Postgraduate Technical Assistant at the Financial Accounting Standards Board (FASB) in Norwalk, Connecticut, where I support the development and maintenance of the U.S. GAAP Taxonomy, contribute to intangibles research, and participate in the Public Markets Advisory Committee (PMAC).
